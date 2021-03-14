@@ -1,0 +1,47 @@
+div.container {
+    padding-top: 30px;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 20px;
+}
+
+.table {
+    display: table;
+    width: 80%;
+    border: 1px solid #666666;
+}
+
+.header-row {
+    display: table-row;
+    font-size: 20px;
+    font-weight: bold;
+}
+.body-table{
+    display: contents;
+}
+.row {
+    display: table-row;
+    font-size: 18px;
+}
+
+.cell {
+    display: table-cell;
+    width: auto;
+    padding: 5px;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    text-transform: capitalize
+}
+
+.cell:first-child {
+    border-left: none;
+}
+
+.row:last-child > .cell {
+    border-bottom: none;
+}
+
+.form-group {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
