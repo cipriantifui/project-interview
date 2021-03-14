@@ -1,9 +1,10 @@
 
-<p>
-Setup project
-1. Clone Project: git clone https://github.com/cipriantifui/project-interview.git
-2. Composer install: composer install
-3. Add env: rename .env.example to .env
-4. Generate key: php artisan key:generate
-4. Run project: php artisan serve
-</p>
+<p><h3>Setup project<h3></p>
+<ol>
+	<li><b>Clone Project:</b> git clone https://github.com/cipriantifui/project-interview.git</li>
+	<li><b>Composer install:</b> composer install</li>
+	<li><b>Add env:</b> rename .env.example to .env</li>
+	<li><b>Generate key:</b> php artisan key:generate</li>
+	<li><b>Run project:</b> php artisan serve</li>
+<ol>
+
