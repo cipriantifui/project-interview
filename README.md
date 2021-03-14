@@ -1,5 +1,5 @@
 
-<p><h3>Setup project<h3></p>
+<p><h3>Setup project</h3></p>
 <ol>
 	<li><b>Clone Project:</b> git clone https://github.com/cipriantifui/project-interview.git</li>
 	<li><b>Composer install:</b> composer install</li>
