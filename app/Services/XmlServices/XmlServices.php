@@ -31,8 +31,25 @@ class XmlServices implements XmlServicesInterface
         $countriesFilter = $zoneFilter !== null ?
             $countriesXml->xpath('country[@zone="' . $zoneFilter . '"]')
             : $countriesXml->country;
-
         return $this->buildCountryArrayFromXml($countriesFilter);
+    }
+
+    /**
+     * This function sort countries by zone
+     * @param bool $descendent
+     * @return array
+     */
+    public function sortCountryByZone($descendent = false)
+    {
+        $countriesXml = $this->readXml();
+        $countriesSort = $this->buildCountryArrayFromXml($countriesXml);
+        usort($countriesSort, function ($a, $b) use ($descendent) {
+            if (filter_var($descendent, FILTER_VALIDATE_BOOLEAN)) {
+                return strcasecmp($b['zone'], $a['zone']);
+            }
+            return strcasecmp($a['zone'], $b['zone']);
+        });
+        return $countriesSort;
     }
 
     /**

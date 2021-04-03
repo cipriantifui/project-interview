@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/', [CountryController::class, 'index']);
 Route::post('country/filter-zone', [CountryController::class, 'filterCountryByZone'])->name('country.filter-zone');
+Route::post('country/sort-zone', [CountryController::class, 'sortCountryByZone'])->name('country.sort-zone');

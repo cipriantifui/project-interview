@@ -19,7 +19,9 @@
 
         <div class="table">
             <div class="header-row">
-                <div class="cell">Regiune</div>
+                <div class="cell">Regiune <span id="sort-region" descendent="false"><i class="fa fa-sort"
+                                                                                       aria-hidden="true"></i></span>
+                </div>
                 <div class="cell">Țară</div>
                 <div class="cell">Limbă</div>
                 <div class="cell">Monedă</div>
@@ -61,22 +63,58 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     },
                     success: function (data) {
-                        let tableContent = '';
-                        $.each(data.countries, function (key, value) {
-                            tableContent += '<div class="row">' +
-                                '<div class="cell"> ' + value.zone + ' </div>' +
-                                '<div class="cell"> ' + value.name.name + ' <br> (' + value.name.native + ') </div>' +
-                                '<div class="cell"> ' + value.language.language + ' <br> (' + value.language.native + ') </div>' +
-                                '<div class="cell"> ' + value.currency.currency + ' <br> (' + value.currency.code + ') </div>' +
-                                '<div class="cell"> ' + value.latitude + ' </div>' +
-                                '<div class="cell"> ' + value.longitude + ' </div>' +
-                                '</div>';
-                        });
-                        $('#body-country-table').html(tableContent);
+                        buildContentTable(data.countries);
                     }
                 });
 
             });
+
+            $('#sort-region').on('click', function () {
+                var descendent = !$(this).data('descendent');
+                $(this).data('descendent', descendent);
+
+                $.ajax({
+                    url: 'country/sort-zone',
+                    type: "POST",
+                    data: {descendent: descendent},
+                    dataType: "json",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    success: function (data) {
+                        toggleSort(descendent);
+                        buildContentTable(data.countries);
+                    }
+                });
+            });
+
+            function buildContentTable(countries) {
+                let tableContent = '';
+                $.each(countries, function (key, value) {
+                    tableContent += '<div class="row">' +
+                        '<div class="cell"> ' + value.zone + ' </div>' +
+                        '<div class="cell"> ' + value.name.name + ' <br> (' + value.name.native + ') </div>' +
+                        '<div class="cell"> ' + value.language.language + ' <br> (' + value.language.native + ') </div>' +
+                        '<div class="cell"> ' + value.currency.currency + ' <br> (' + value.currency.code + ') </div>' +
+                        '<div class="cell"> ' + value.latitude + ' </div>' +
+                        '<div class="cell"> ' + value.longitude + ' </div>' +
+                        '</div>';
+                });
+                $('#body-country-table').html(tableContent);
+            }
+
+            function toggleSort(descendent) {
+                let element = $('#sort-region');
+                if (descendent) {
+                    element.find('i').addClass('fa-sort-down');
+                    element.find('i').removeClass('fa-sort');
+                    element.find('i').removeClass('fa-sort-up');
+                } else {
+                    element.find('i').addClass('fa-sort-up');
+                    element.find('i').removeClass('fa-sort');
+                    element.find('i').removeClass('fa-sort-down');
+                }
+            }
         });
     </script>
 @endsection

@@ -18,4 +18,11 @@ interface XmlServicesInterface
      * @return array
      */
     public function filterCountryByZone($zoneFilter);
+
+    /**
+     * This function sort countries by zone
+     * @param bool $descendent
+     * @return array
+     */
+    public function sortCountryByZone($descendent = false);
 }

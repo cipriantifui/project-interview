@@ -45,4 +45,15 @@ class CountryController extends Controller
         $filterZoneCountry = $this->xmlServices->filterCountryByZone($request->input('zone'));
         return response()->json(['success' => true, 'countries' => $filterZoneCountry]);
     }
+
+    /**
+     * Get countries sorted by zone
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function sortCountryByZone(Request $request)
+    {
+        $sortCountryByZone = $this->xmlServices->sortCountryByZone($request->input('descendent'));
+        return response()->json(['success' => true, 'countries' => $sortCountryByZone]);
+    }
 }
